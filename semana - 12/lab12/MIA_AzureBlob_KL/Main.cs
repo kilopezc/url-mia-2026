@@ -6,7 +6,6 @@ using Azure.Storage.Blobs.Models;
 
 class Program
 {
-    // Coloca aquí la Cadena de conexión que copiaste de Azure Portal
     private static string connectionString = "DefaultEndpointsProtocol=https;AccountName=miaarchivoskl;AccountKey=TU_ACCOUNT_KEY_AQUI;EndpointSuffix=core.windows.net";    
     // Nombre del contenedor solicitado en la práctica
     private static string containerName = "miaarchivos";
