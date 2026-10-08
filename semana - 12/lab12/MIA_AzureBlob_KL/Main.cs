@@ -3,16 +3,26 @@ using System.IO;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using DotNetEnv;
 
 class Program
 {
-    private static string connectionString = "DefaultEndpointsProtocol=https;AccountName=miaarchivoskl;AccountKey=TU_ACCOUNT_KEY_AQUI;EndpointSuffix=core.windows.net";    
-    // Nombre del contenedor solicitado en la práctica
     private static string containerName = "miaarchivos";
 
     static async Task Main(string[] args)
     {
-        // Conexión directa usando el fragmento de tu ingeniero
+        Env.Load();
+
+        string? connectionString =
+            Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING_LOCAL");
+
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            Console.WriteLine("No se encontro la Connection String.");
+            Console.WriteLine("Configure la variable AZURE_STORAGE_CONNECTION_STRING_LOCAL.");
+            return;
+        }
+
         BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
         BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
 
